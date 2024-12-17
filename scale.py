@@ -1,8 +1,8 @@
 import boto3
 
-def update_service_desired_count(cluster_name, service_name, new_desired_count):
-    # Create a boto3 client for ECS
-    ecs_client = boto3.client('ecs')
+def update_service_desired_count(cluster_name, service_name, new_desired_count, region_name):
+    # Create a boto3 client for ECS with the specified region
+    ecs_client = boto3.client('ecs', region_name=region_name)
 
     # Update the desired count for the service
     response = ecs_client.update_service(
@@ -18,5 +18,6 @@ if __name__ == "__main__":
     cluster_name = 'default'
     service_name = 'ECS_Runner'
     new_desired_count = 10  # Set the desired count to the new value you want
+    region_name = 'us-east-1'  # Set the AWS region you want to use
 
-    update_service_desired_count(cluster_name, service_name, new_desired_count)
+    update_service_desired_count(cluster_name, service_name, new_desired_count, region_name)
