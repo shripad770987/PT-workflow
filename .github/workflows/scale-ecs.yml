@@ -1,0 +1,31 @@
+name: Scale ECS Runners
+
+on:
+  workflow_dispatch:  # Trigger manually or from other workflows
+
+jobs:
+  scale-runners:
+    runs-on: escrunner
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Dependencies
+        run: pip install boto3
+
+      - name: Scale ECS Runners
+        env:
+          CLUSTER_NAME: 'default'
+          SERVICE_NAME: 'ECS_Runner'
+          DESIRED_COUNT: '10'
+          AWS_REGION: 'us-east-1'
+        run: python your_script.py
