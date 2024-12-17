@@ -42,6 +42,6 @@ if __name__ == "__main__":
     cluster_name = 'default'
     service_name = 'ECS_Runner'
     new_desired_count = 10  # Set the desired count to the new value you want
-    region_name = 'us-west-2'  # Set the AWS region you want to use
+    region_name = 'us-east-1'  # Set the AWS region you want to use
 
     update_service_desired_count(cluster_name, service_name, new_desired_count, region_name)
