@@ -1,7 +1,6 @@
 name: Run psuedocode
 
 on:
- push:
  workflow_dispatch:
     inputs:
       comp:
