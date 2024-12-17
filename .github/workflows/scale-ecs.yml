@@ -1,31 +1,42 @@
 name: Scale ECS Runners
 
 on:
-  workflow_dispatch:  # Trigger manually or from other workflows
+  workflow_dispatch:  # Trigger workflow manually
 
 jobs:
-  scale-runners:
-    runs-on: escrunner
+  scale-ecs:
+    runs-on: ecsrunner
+
     steps:
+      # Step 1: Checkout the repository to access your script
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Configure AWS Credentials
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          aws-region: us-east-1  # Update to your region if necessary
 
-      - name: Set up Python
+      # Step 3: Setup Python environment
+      - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: 3.x  # Use the latest 3.x Python version
 
-      - name: Install Dependencies
-        run: pip install boto3
+      # Step 4: Install dependencies
+      - name: Install Python Dependencies
+        run: |
+          pip install boto3
 
+      # Step 5: Run the ECS Runner Scaling Script
       - name: Scale ECS Runners
         env:
-          CLUSTER_NAME: 'default'
-          SERVICE_NAME: 'ECS_Runner'
-          DESIRED_COUNT: '10'
-          AWS_REGION: 'us-east-1'
-        run: python your_script.py
+          CLUSTER_NAME: 'default'         # Replace with your ECS cluster name
+          SERVICE_NAME: 'ECS_Runner'      # Replace with your ECS service name
+          DESIRED_COUNT: '10'             # Update with desired runner count
+          AWS_REGION: 'us-east-1'         # Update with your AWS region
+        run: |
+          python ecs-runner.py
