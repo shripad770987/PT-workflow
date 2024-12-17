@@ -22,8 +22,8 @@ def update_service_desired_count(cluster_name, service_name, new_desired_count, 
             cluster=cluster_name,
             services=[service_name],
             WaiterConfig={
-                'Delay': 15,
-                'MaxAttempts': 40
+                'Delay': 10,
+                'MaxAttempts': 12  # Wait for up to 2 minutes
             }
         )
         print(f"Service '{service_name}' has stabilized.")
@@ -36,12 +36,19 @@ def update_service_desired_count(cluster_name, service_name, new_desired_count, 
         services=[service_name]
     )
     running_count = service_response['services'][0]['runningCount']
+    desired_count = service_response['services'][0]['desiredCount']
     print(f"Service '{service_name}' running count: {running_count}")
+    print(f"Service '{service_name}' desired count: {desired_count}")
+
+    # Log detailed service events
+    events = service_response['services'][0]['events']
+    for event in events:
+        print(f"Event: {event['message']}")
 
 if __name__ == "__main__":
     cluster_name = 'default'
     service_name = 'ECS_Runner'
-    new_desired_count = 10  # Set the desired count to the new value you want
+    new_desired_count = 5  # Set the desired count to the new value you want
     region_name = 'us-east-1'  # Set the AWS region you want to use
 
     update_service_desired_count(cluster_name, service_name, new_desired_count, region_name)
