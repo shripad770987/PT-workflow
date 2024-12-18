@@ -3,7 +3,6 @@ name: Run python script
 on:
   push:
   workflow_dispatch:
-
 env:
   GITHUB: "${{secrets.PAT}}"
   
