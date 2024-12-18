@@ -36,7 +36,7 @@ jobs:
         env:
           CLUSTER_NAME: 'default'         # Replace with your ECS cluster name
           SERVICE_NAME: 'ECS_Runner'      # Replace with your ECS service name
-          DESIRED_COUNT: '10'             # Update with desired runner count
+          DESIRED_COUNT: '5'             # Update with desired runner count
           AWS_REGION: 'us-east-1'         # Update with your AWS region
         run: |
           python ecs-runner.py
