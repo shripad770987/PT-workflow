@@ -48,7 +48,7 @@ def update_service_desired_count(cluster_name, service_name, new_desired_count, 
 if __name__ == "__main__":
     cluster_name = 'default'
     service_name = 'ECS_Runner'
-    new_desired_count = 5  # Set the desired count to the new value you want
+    new_desired_count = 6  # Set the desired count to the new value you want
     region_name = 'us-east-1'  # Set the AWS region you want to use
 
     update_service_desired_count(cluster_name, service_name, new_desired_count, region_name)
