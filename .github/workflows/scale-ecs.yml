@@ -6,7 +6,6 @@ on:
 jobs:
   scale-ecs:
     runs-on: ecsrunner
-
     steps:
       # Step 1: Checkout the repository to access your script
       - name: Checkout Code
