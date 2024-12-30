@@ -46,8 +46,8 @@ def update_service_desired_count(cluster_name, service_name, new_desired_count, 
         print(f"Event: {event['message']}")
 
 if __name__ == "__main__":
-    cluster_name = 'default'
-    service_name = 'ECS_Runner'
+    cluster_name = 'TRFunctionalAPI'
+    service_name = 'ptRUNNER'
     new_desired_count = 6  # Set the desired count to the new value you want
     region_name = 'us-east-1'  # Set the AWS region you want to use
 
